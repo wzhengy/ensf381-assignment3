@@ -270,3 +270,65 @@ footer {
 .signup-link:hover {
     text-decoration: underline;
 }
+
+
+/* Sign Up Page */
+.sign-up {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ddd;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.sign-up form {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    flex-direction: column;
+}
+
+.sign-up label {
+    margin: 10px;
+}
+.sign-up input {
+    height: 35px;
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.sign-up button {
+    margin: 10px;
+    height: 35px;
+    width: 65px;
+    margin-left: 15px;
+    border-radius: 5px;
+    text-align: center;
+    opacity: 50%;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.sign-up button:hover {
+    background-color: #45A049;
+    opacity: 100%;
+}
+
+.sign-up-error {
+    border-width: 2px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin: 20px;
+}
+
+.sign-up-error div {
+    display: block;
+    background-color: #f9f9f9;
+}
+
+.sign-up-error p {
+    background-color: #f9f9f9;
+}
