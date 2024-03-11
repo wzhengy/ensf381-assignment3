@@ -1,0 +1,111 @@
+<!-- products.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Add meta tags, title, and link to styles.css here -->
+    <meta charset="UTF-8">
+    <meta name="description" content="Outfitte Products">
+    <meta name="keywords" content="HTML, CSS, Products, Clothing, Outfitte">
+    <meta name="author" content="Sean Pham, Wilson Zheng">
+    <title>Products - Outfitte</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <script>
+        let numOfProds = 4;
+        let prodqtys = new Array(numOfProds).fill(0);
+
+        window.onload = function() {
+            let div = document.getElementById("cart-item-list");
+
+            for (let i = 0; i < numOfProds; i++) {
+                let p = document.createElement("p");
+                p.className = "prodInCart";
+                p.id = "prod" + i + "cart";
+                p.innerHTML = "";
+                div.appendChild(p);
+            }
+        }
+        function updateItem(prodnum) {
+            let prod = document.getElementById("prod" + (prodnum) + "cart");
+            let productlisting = document.getElementById("prod" + (prodnum))
+            let price = productlisting.dataset.price
+            let name = productlisting.dataset.name
+            prod.innerHTML = prodqtys[prodnum] > 0 ? `${name} - ${price} - ${prodqtys[prodnum]} <button class="prodRemove" id=${"prod"+[prodnum]+"remove"} onclick="removeItem(${[prodnum]})">Remove</button>` : "";
+        }
+
+        function addItem(prodnum) {
+            // Get name of product for alert
+            let productlisting = document.getElementById("prod" + (prodnum))
+            let name = productlisting.dataset.name
+            // Increment the qty for the product
+            prodqtys[prodnum]++;
+            alert(`${name} has been added to the cart.`)
+            updateItem(prodnum);
+        }
+        function removeItem(prodnum) {
+            // Increment the qty for the product
+            if (prodqtys[prodnum]>0) {prodqtys[prodnum]--;}
+            updateItem(prodnum);
+        }
+
+    </script>
+</head>
+
+<body>
+    <header>
+        <!-- header -->
+        <img src="logo.png" alt="logo" width="50px"> 
+        <span>Outfitte</span>
+    </header>
+    
+    <div>
+        <!-- div -->
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="login.html" class="nav-link">Login</a>
+    </div>
+
+    <main>
+        <!-- main -->
+        <section class="product-list">
+            <div class="product" id="prod0" data-price="11.99" data-name="T-shirt">
+                <img src="product1.png" alt="Product 1" width="350">
+                <h2>T-shirt</h2>
+                <p class="price">$11.99</p>
+                <button class="addToCart" onclick="addItem(0)">Add to Cart</button>
+            </div>
+            <div class="product" id="prod1" data-price="59.99" data-name="Hoodie">
+                <img src="product2.png" alt="Product 2" width="350">
+                <h2>Hoodie</h2>
+                <p class="price">$59.99</p>
+                <button class="addToCart" onclick="addItem(1)">Add to Cart</button>
+            </div>
+            <div class="product" id="prod2" data-price="40.99" data-name="Pants">
+                <img src="product3.png" alt="Product 3" width="350">
+                <h2>Pants</h2>
+                <p class="price">$40.99</p>
+                <button class="addToCart" onclick="addItem(2)">Add to Cart</button>
+            </div>
+            <div class="product" id="prod3" data-price="12.99" data-name="Hat">
+                <img src="product4.png" alt="Product 4" width="350">
+                <h2>Hat</h2>
+                <p class="price">$12.99</p>
+                <button class="addToCart" onclick="addItem(3)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart-list">
+            <div class="cart-title">
+                <h2>Shopping Cart</h2>
+            </div>
+            <div class="cart-item-list" id="cart-item-list">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- footer -->
+        <p>Copyright Sean Pham, Wilson Zheng</p>
+    </footer>
+</body>
+</html>
