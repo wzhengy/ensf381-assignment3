@@ -1,26 +1,33 @@
-<!-- login.html -->
+<!-- Group Members -->
+<!-- Wilson Zheng (UCID: 30157158) -->
+<!-- Sean Pham (UCID: 30192689) -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <!-- Add meta tags, title, and link to styles.css here -->
     <meta charset="UTF-8">
     <meta name="description" content="Outfitte Login">
     <meta name="keywords" content="HTML, CSS, Login, Clothing, Outfitte">
     <meta name="author" content="Sean Pham, Wilson Zheng">
     <title>Login - Outfitte</title>
     <link rel="stylesheet" href="styles.css">
-
+    <style>
+        #messageBox {
+            border: 2px solid #f9f9f9;
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin: 20px;
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <!-- header -->
-        <img src="logo.png" alt="logo" width="50px"> 
+        <img src="logo.png" alt="logo" width="50px">
         <span>Outfitte</span>
     </header>
-    
+
     <div>
-        <!-- div -->
         <a href="index.html" class="nav-link">Home</a>
         <a href="products.html" class="nav-link">Products</a>
         <a href="contact.html" class="nav-link">Contact</a>
@@ -28,7 +35,6 @@
     </div>
 
     <main>
-        <!-- main -->
         <section class="login-form">
             <form action="#" method="post">
                 <label for="username">Username:</label>
@@ -37,17 +43,50 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required placeholder="Input password here">
 
-                <button type="submit" class="login-btn">Login</button>
+                <button type="button" class="login-btn" onclick="login()">Login</button>
                 <p>Don't have an account? <a href="signup.html" class="signup-link">Sign up</a> </p>
+
+                <div id="messageBox">
+                    <p id="messageText"></p>
+                </div>
             </form>
-            
-            
         </section>
     </main>
 
     <footer>
-        <!-- footer -->
         <p>Copyright Sean Pham, Wilson Zheng</p>
     </footer>
+
+    <script>
+        function login() {
+            const usernameInput = document.getElementById('username').value;
+            const passwordInput = document.getElementById('password').value;
+            const messageBox = document.getElementById('messageBox');
+            const messageText = document.getElementById('messageText');
+
+            const apiEndpoint = 'https://jsonplaceholder.typicode.com/users';
+
+            fetch(apiEndpoint)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const validUser = data.find(user => user.name === usernameInput && user.email === passwordInput);
+
+                    if (validUser) {
+                        messageText.textContent = 'Login successful!';
+                    } else {
+                        messageText.textContent = 'Invalid username or password. Please try again.';
+                    }
+                })
+                .catch(error => {
+                    messageText.textContent = 'Error fetching data from the API: ' + error.message;
+                });
+        }
+    </script>
 </body>
+
 </html>
