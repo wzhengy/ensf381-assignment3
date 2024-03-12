@@ -59,13 +59,11 @@
 
     <script>
         function login() {
-            const usernameInput = document.getElementById('username').value;
-            const passwordInput = document.getElementById('password').value;
             const messageBox = document.getElementById('messageBox');
             const messageText = document.getElementById('messageText');
-
+    
             const apiEndpoint = 'https://jsonplaceholder.typicode.com/users';
-
+    
             fetch(apiEndpoint)
                 .then(response => {
                     if (!response.ok) {
@@ -74,9 +72,16 @@
                     return response.json();
                 })
                 .then(data => {
-                    const validUser = data.find(user => user.name === usernameInput && user.email === passwordInput);
-
-                    if (validUser) {
+                    var userFound = false
+                    data.forEach(user =>{
+                        const usernameInput = document.getElementById('username').value;
+                        const passwordInput = document.getElementById('password').value;
+                        if(user.username == usernameInput && user.email == passwordInput)
+                            userFound = true;
+                        return;
+                });
+    
+                    if (userFound==true) {
                         messageText.textContent = 'Login successful!';
                     } else {
                         messageText.textContent = 'Invalid username or password. Please try again.';
@@ -87,6 +92,3 @@
                 });
         }
     </script>
-</body>
-
-</html>
