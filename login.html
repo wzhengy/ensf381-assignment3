@@ -11,14 +11,6 @@
     <meta name="author" content="Sean Pham, Wilson Zheng">
     <title>Login - Outfitte</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        #messageBox {
-            border: 2px solid #f9f9f9;
-            background-color: #f9f9f9;
-            padding: 10px;
-            margin: 20px;
-        }
-    </style>
 </head>
 
 <body>
@@ -46,11 +38,10 @@
                 <button type="button" class="login-btn" onclick="login()">Login</button>
                 <p>Don't have an account? <a href="signup.html" class="signup-link">Sign up</a> </p>
 
-                <div id="messageBox">
-                    <p id="messageText"></p>
-                </div>
+                
             </form>
         </section>
+        <div class="messageBox" id="messageBox"></div>
     </main>
 
     <footer>
@@ -60,14 +51,18 @@
     <script>
         function login() {
             const messageBox = document.getElementById('messageBox');
+            if (messageBox.innerHTML.trim() === ''){
+                messageBox.innerHTML = `<p id="messageText"></p>`; // adds <p> element into <div>
+            }
+
             const messageText = document.getElementById('messageText');
     
             const apiEndpoint = 'https://jsonplaceholder.typicode.com/users';
-    
+            
             fetch(apiEndpoint)
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Network response was not ok');
+                        throw new Error('Network response was not ok'); 
                     }
                     return response.json();
                 })
